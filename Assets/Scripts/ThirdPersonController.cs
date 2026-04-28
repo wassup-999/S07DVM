@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
 using System;
+using UnityEngine.Events;
 
 public class ThirdPersonController : MonoBehaviour
 {
@@ -63,6 +64,7 @@ public class ThirdPersonController : MonoBehaviour
     Vector3 impactPoint;
     Vector3 crossResult;
 
+    public UnityEvent OnShoot;
     private void Awake()
     {
         inputs = new();
@@ -268,15 +270,18 @@ public class ThirdPersonController : MonoBehaviour
     private void OnAttack(InputAction.CallbackContext context)
     {
         Physics.Raycast(WeaponShootAnchor.position, characterAimCamera.transform.forward, out RaycastHit hit, 100);
-
+        
         if (hit.collider != null)
         {
+            OnShoot?.Invoke();
             LineRenderer ray = Instantiate(RayPrefab, transform.position, Quaternion.identity);
             ray.gameObject.transform.position = WeaponShootAnchor.position;
             ray.positionCount = 2;
             ray.SetPosition(0, WeaponShootAnchor.position);
             ray.SetPosition(1, hit.point);
+            Destroy(ray, 3f);
         }
+        
     }
 
     public float GetSpeed()
