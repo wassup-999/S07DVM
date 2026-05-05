@@ -95,6 +95,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Spawn",
+                    "type": "Button",
+                    "id": "420f6f3e-2f3e-42ac-8979-c0780831b1e9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -491,6 +500,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0aff4961-b830-4965-bf24-4b92d6457e18",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spawn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

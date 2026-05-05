@@ -7,7 +7,7 @@ public class Turret : MonoBehaviour
     public float rotationSpeed;
     void Start()
     {
-        
+        Enemy = GameObject.FindGameObjectWithTag("Enemy");
     }
 
     

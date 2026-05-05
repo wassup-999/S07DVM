@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine.Events;
+using System.Collections;
 
 public class ThirdPersonController : MonoBehaviour
 {
@@ -99,10 +100,12 @@ public class ThirdPersonController : MonoBehaviour
             aimMode = false;
         };
 
+        inputs.Player.Spawn.performed += OnSpawn;
         // inputs.Player.Sprint.performed += OnDash;
     }
 
     
+
     void Start()
     {
 
@@ -111,7 +114,6 @@ public class ThirdPersonController : MonoBehaviour
     {
         EnableWallRun();
         OnMove();
-        //OnSimpleMove();
     }
 
     public void OnMove()
@@ -197,7 +199,10 @@ public class ThirdPersonController : MonoBehaviour
         }
         controller.Move(moveDir * Time.deltaTime);
     }
-
+    private void OnSpawn(InputAction.CallbackContext context)
+    {
+        PlayerManager.instance.player.SpawnTurret();
+    }
     private void OnJump(InputAction.CallbackContext context)
     {
         if (!controller.isGrounded) return;
@@ -309,5 +314,5 @@ public class ThirdPersonController : MonoBehaviour
         Gizmos.DrawRay(impactPoint, crossResult * rayLenght);
 
 
-    }
+    }    
 }
