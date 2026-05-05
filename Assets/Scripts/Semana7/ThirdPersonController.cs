@@ -333,9 +333,19 @@ public class ThirdPersonController : MonoBehaviour
                 Quaternion rot = Quaternion.LookRotation(hit.normal);
                 ParticleSystem impact = Instantiate(OnHit, hit.point, rot);
                 impact.Play();
+                var hitObj = hit.collider.gameObject;
+                var agent = hitObj.GetComponent<AgentSimpleController>();
+                if (agent == null)
+                    agent = hitObj.GetComponentInParent<AgentSimpleController>();
 
-                
-                
+                if (agent != null)
+                {
+                    
+                    agent.life -= 100;
+                }
+              
+
+
             }
             else
             {
