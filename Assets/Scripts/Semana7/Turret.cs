@@ -23,6 +23,8 @@ public class Turret : MonoBehaviour
 
     [FoldoutGroup("CDShoot")]
     public float ShootTimer;
+    [FoldoutGroup("CDShoot")]
+    public float SpawnInterval;
     public List<Enemy> enemys;
     void Start()
     {
@@ -89,7 +91,15 @@ public class Turret : MonoBehaviour
     }
     public void ShootMechanic()
     {
-        GameObject bullet = Instantiate(BulletPrefab, SpawnbulletRef.transform.position,Quaternion.identity);
+        ShootTimer += Time.deltaTime;
+        if(ShootTimer >= SpawnInterval)
+        {
+            GameObject bullet = Instantiate(BulletPrefab, SpawnbulletRef.transform.position, Quaternion.identity);
+            SpawnInterval = 0;
+        }
+
+
+        
         //Vector3 dir = bullet.transform.forward;
         //bullet.GetComponent<Rigidbody>().AddForce(dir * ShootForce, ForceMode.Impulse);
     }
