@@ -24,6 +24,8 @@ public class ThirdPersonController : MonoBehaviour
     public Transform WeaponShootAnchor;
     [FoldoutGroup("References")]
     public GameObject GranadePrefab;
+    [FoldoutGroup("References")]
+    public GameObject TurretPrefab;
 
 
     [FoldoutGroup("Controller")]
@@ -218,7 +220,13 @@ public class ThirdPersonController : MonoBehaviour
     }
     private void OnSpawn(InputAction.CallbackContext context)
     {
-        PlayerManager.instance.player.SpawnTurret();
+        if (Physics.SphereCast(WeaponShootAnchor.position, 5f, characterAimCamera.transform.forward, out RaycastHit hit, 100, enemyMash))
+        {
+            //Hacer que un torreta se instancia en la normal de cualquier objeto (direccion respectiva)
+            GameObject turret = Instantiate(TurretPrefab, hit.point, Quaternion.identity);
+            turret.transform.up = hit.normal;
+        }
+            //PlayerManager.instance.player.SpawnTurret();
     }
     private void OnJump(InputAction.CallbackContext context)
     {
@@ -303,6 +311,8 @@ public class ThirdPersonController : MonoBehaviour
             ray.SetPosition(1, hit.point);
             Destroy(ray, 3f);
 
+            
+             
             Quaternion rot = Quaternion.LookRotation(hit.normal);
             ParticleSystem impact = Instantiate(OnHit, hit.point, rot);
             impact.Play();

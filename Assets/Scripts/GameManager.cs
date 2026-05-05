@@ -5,6 +5,25 @@ using Sirenix.OdinInspector;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+    [FoldoutGroup("References")]
+    public SpawnerEnemy enemySpawner;
+    [FoldoutGroup("References")]
+    public PlayerManager playerManager;
+    [FoldoutGroup("References")]
+    public Enemy enemy;
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    /*
     public CinemachineCamera camA;
     public CinemachineCamera camB;
 
@@ -27,4 +46,5 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Camera transition finished!");
     }
+    */
 }

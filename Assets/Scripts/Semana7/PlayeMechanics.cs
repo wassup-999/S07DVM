@@ -2,8 +2,11 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
 
-public class PlayeMechanics : MonoBehaviour
+public class PlayeMechanics : MonoBehaviour , IRecieveDamage
 {
+    [FoldoutGroup("Life Settings")]
+    public float Life;
+    /*
     [FoldoutGroup("References")]
     public GameObject TurretPrefab;
     [FoldoutGroup("References")]
@@ -13,6 +16,7 @@ public class PlayeMechanics : MonoBehaviour
     [FoldoutGroup("CoolDown Settings")]
     public float TurretSpawnInterval;
     public bool CanSpawnTurret = true;
+    */
     void Start()
     {
         
@@ -23,6 +27,7 @@ public class PlayeMechanics : MonoBehaviour
     {
         
     }
+    /*
     public void SpawnTurret()
     {
         if (CanSpawnTurret)
@@ -34,6 +39,8 @@ public class PlayeMechanics : MonoBehaviour
 
         
     }
+
+
     public IEnumerator CDSpawnTurret()
     {
         CurrentCDSpawn = 0;
@@ -44,5 +51,12 @@ public class PlayeMechanics : MonoBehaviour
         }
         CanSpawnTurret = true;
         yield break;
+    }
+    */
+    public void MakeDamage(float damage)
+    {
+        damage = GameManager.Instance.enemy.Damage;
+        Life -=damage;
+        Debug.Log("Player hit");
     }
 }
