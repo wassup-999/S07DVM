@@ -17,7 +17,7 @@ public class Turret : MonoBehaviour
     }
     public void Rotate()
     {
-        Vector3 Head = Enemy.transform.position - transform.position;
+        Vector3 Head = (Enemy.transform.position - transform.position).normalized;
         Quaternion targetQuaternion = Quaternion.LookRotation(Head);
         HeadTurret.transform.rotation = Quaternion.Slerp(HeadTurret.transform.rotation,targetQuaternion,rotationSpeed * Time.deltaTime);
     }

@@ -1977,15 +1977,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b31059729ac0c1841b2b68babd8c1bdd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.69001174
+      value: 0.03960848
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b31059729ac0c1841b2b68babd8c1bdd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.35458001
+      value: -0.593
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b31059729ac0c1841b2b68babd8c1bdd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.7354422
+      value: -0.14491749
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b31059729ac0c1841b2b68babd8c1bdd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2022,10 +2022,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b31059729ac0c1841b2b68babd8c1bdd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1696684052}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b31059729ac0c1841b2b68babd8c1bdd, type: 3}
 --- !u!198 &1480899773 stripped
 ParticleSystem:
@@ -2348,31 +2345,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6bfe918d23ca7e149bd2dcdf6694816d, type: 3}
   m_PrefabInstance: {fileID: 849618090}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1696684048 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b31059729ac0c1841b2b68babd8c1bdd, type: 3}
-  m_PrefabInstance: {fileID: 1454522485}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1696684051 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b31059729ac0c1841b2b68babd8c1bdd, type: 3}
   m_PrefabInstance: {fileID: 1454522485}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1696684052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1696684048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c67c7e013ee6a874e92d4c3b672cbd1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Turret
-  HeadTurret: {fileID: 0}
-  Enemy: {fileID: 0}
-  rotationSpeed: 0
 --- !u!4 &1749267998 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 735a75fca9946dc42b96dd54915240f3, type: 3}
@@ -2701,7 +2678,7 @@ Transform:
   m_GameObject: {fileID: 2075885921}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.30138, y: 0.32542, z: 5.41164}
+  m_LocalPosition: {x: -4.031, y: 1.273, z: 8.292}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2987,5 +2964,5 @@ SceneRoots:
   - {fileID: 1624100055}
   - {fileID: 4196956584613155405}
   - {fileID: 887173383}
-  - {fileID: 2075885923}
   - {fileID: 2966016761231455014}
+  - {fileID: 2075885923}
