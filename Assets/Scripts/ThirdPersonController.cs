@@ -65,6 +65,7 @@ public class ThirdPersonController : MonoBehaviour
     Vector3 crossResult;
 
     public UnityEvent OnShoot;
+    public ParticleSystem OnHit;
     private void Awake()
     {
         inputs = new();
@@ -280,6 +281,11 @@ public class ThirdPersonController : MonoBehaviour
             ray.SetPosition(0, WeaponShootAnchor.position);
             ray.SetPosition(1, hit.point);
             Destroy(ray, 3f);
+
+            Quaternion rot = Quaternion.LookRotation(hit.normal);
+            ParticleSystem impact = Instantiate(OnHit, hit.point, rot);
+            impact.Play();
+
         }
         
     }
