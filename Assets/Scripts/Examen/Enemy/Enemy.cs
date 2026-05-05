@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
 
     [FoldoutGroup("Attack Settings")]
     public float Damage;
+    [FoldoutGroup("Life Settings")]
+    public float Life;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayeMechanics>();
@@ -22,6 +24,7 @@ public class Enemy : MonoBehaviour
     {
         FollowPlayer();
         MakeDamage();
+        OnDestroy();
     }
 
     public void FollowPlayer()
@@ -42,6 +45,13 @@ public class Enemy : MonoBehaviour
         {
             player.MakeDamage(10);
             GameManager.Instance.enemySpawner.CurrentEnemies--;
+            Destroy(gameObject);
+        }
+    }
+    public void OnDestroy()
+    {
+        if(Life <= 0)
+        {
             Destroy(gameObject);
         }
     }

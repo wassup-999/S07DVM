@@ -311,9 +311,15 @@ public class ThirdPersonController : MonoBehaviour
             ray.SetPosition(1, hit.point);
             Destroy(ray, 3f);
 
+            //Hacer daño al enemigo
+
+            if (hit.collider.gameObject == null) return;
+            GameObject obj = hit.collider.gameObject;
+            obj.GetComponent<Enemy>().Life-=20;
             
-             
+            
             Quaternion rot = Quaternion.LookRotation(hit.normal);
+            
             ParticleSystem impact = Instantiate(OnHit, hit.point, rot);
             impact.Play();
         }
