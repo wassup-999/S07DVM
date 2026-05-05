@@ -21,8 +21,21 @@ public class ThirdPersonController : MonoBehaviour
     [FoldoutGroup("References")]
     public LineRenderer RayPrefab;
     [FoldoutGroup("References")]
+    public GameObject GranadePrefab;
+    [FoldoutGroup("References")]
+    public GameObject TurretPrefab;
+    [FoldoutGroup("References")]
     public Transform WeaponShootAnchor;
+    [FoldoutGroup("References")]
+    public Transform SpawnRef;
+    [FoldoutGroup("CoolDown Settings")]
+    public float CurrentCDSpawn;
+    [FoldoutGroup("CoolDown Settings")]
+    public float TurretSpawnInterval;
+    public bool CanSpawnTurret = true;
 
+    [FoldoutGroup("References")]
+    [SerializeField] private float ThrowForce;
 
     [FoldoutGroup("Controller")]
     public float moveSpeed = 5f;
@@ -46,7 +59,10 @@ public class ThirdPersonController : MonoBehaviour
     [FoldoutGroup("Controller/Animator"), SerializeField]
     private CinemachineImpulseSource source;
 
+
     [SerializeField] private Vector2 moveInput;
+    [FoldoutGroup("Layers")]
+    public LayerMask enemyMask;
 
 
 
@@ -87,6 +103,7 @@ public class ThirdPersonController : MonoBehaviour
 
         inputs.Player.Attack.performed += OnAttack;
         inputs.Player.Jump.performed += OnJump;
+        inputs.Player.ThrowGranade.performed += ThrowStm;
         inputs.Player.Aim.started += ctx =>
             {
                 characterCamera.Priority = 0;
@@ -103,8 +120,10 @@ public class ThirdPersonController : MonoBehaviour
         inputs.Player.Spawn.performed += OnSpawn;
         // inputs.Player.Sprint.performed += OnDash;
     }
+ 
+  
 
-    
+
 
     void Start()
     {
@@ -232,6 +251,28 @@ public class ThirdPersonController : MonoBehaviour
         IsDashing = true;
         dashTimer = dashDuration;
     }
+    public void SpawnTurret()
+    {
+        if (CanSpawnTurret)
+        {
+            GameObject Turret = Instantiate(TurretPrefab, SpawnRef.transform.position, Quaternion.identity);
+            CanSpawnTurret = false;
+            StartCoroutine(CDSpawnTurret());
+        }
+
+
+    }
+    public IEnumerator CDSpawnTurret()
+    {
+        CurrentCDSpawn = 0;
+        while (CurrentCDSpawn <= TurretSpawnInterval)
+        {
+            CurrentCDSpawn += Time.deltaTime;
+            yield return null;
+        }
+        CanSpawnTurret = true;
+        yield break;
+    }
 
     public void EnableWallRun()
     {
@@ -275,24 +316,41 @@ public class ThirdPersonController : MonoBehaviour
     }
     private void OnAttack(InputAction.CallbackContext context)
     {
-        Physics.Raycast(WeaponShootAnchor.position, characterAimCamera.transform.forward, out RaycastHit hit, 100);
-        
-        if (hit.collider != null)
+        //(Physics.SphereCast(WeaponShootAnchor.position, 5f, characterAimCamera.transform.forward, out RaycastHit hit, 100f, enemyMask))
+        if ( Physics.Raycast(WeaponShootAnchor.position, characterAimCamera.transform.forward, out RaycastHit hit, 100));
         {
-            OnShoot?.Invoke();
-            LineRenderer ray = Instantiate(RayPrefab, transform.position, Quaternion.identity);
-            ray.gameObject.transform.position = WeaponShootAnchor.position;
-            ray.positionCount = 2;
-            ray.SetPosition(0, WeaponShootAnchor.position);
-            ray.SetPosition(1, hit.point);
-            Destroy(ray, 3f);
+            if (hit.collider != null)
+            {
+                Debug.Log("HIT!!!");
+                OnShoot?.Invoke();
+                LineRenderer ray = Instantiate(RayPrefab, transform.position, Quaternion.identity);
+                ray.gameObject.transform.position = WeaponShootAnchor.position;
+                ray.positionCount = 2;
+                ray.SetPosition(0, WeaponShootAnchor.position);
+                ray.SetPosition(1, hit.point);
+                Destroy(ray, 3f);
 
-            Quaternion rot = Quaternion.LookRotation(hit.normal);
-            ParticleSystem impact = Instantiate(OnHit, hit.point, rot);
-            impact.Play();
-
+                Quaternion rot = Quaternion.LookRotation(hit.normal);
+                ParticleSystem impact = Instantiate(OnHit, hit.point, rot);
+                impact.Play();
+                
+            }
+            else
+            {
+                Debug.Log("MISSSSS!!!");
+            }
         }
-        
+    }
+    private void ThrowStm(InputAction.CallbackContext context)
+    {
+        GameObject granade = Instantiate(GranadePrefab, transform.position, Quaternion.identity);
+        Vector3 dir = characterCamera.transform.forward;
+        granade.GetComponent<Rigidbody>().AddForce(dir, ForceMode.Impulse);
+        Rigidbody rb = granade.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.AddForce(dir * ThrowForce, ForceMode.Impulse);
+        }
     }
 
     public float GetSpeed()
