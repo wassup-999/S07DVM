@@ -4,6 +4,7 @@ public class AgentSimpleController : MonoBehaviour
 {
     public Transform Target;
     private NavMeshAgent agent;
+    public int life = 100;
 
     void Start()
     {
@@ -21,20 +22,18 @@ public class AgentSimpleController : MonoBehaviour
 
     void Update()
     {
-        OnDrawGizmos();
+       
+        if (life <= 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         if (agent != null && Target != null)
         {
             agent.SetDestination(Target.position);
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        if (Target != null)
-        {
-            Vector3 dir = Target.position - transform.position;
-            Gizmos.DrawRay(transform.position, dir);
-        }
-    }
+   
 }

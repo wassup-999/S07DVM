@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Turret
   HeadTurret: {fileID: 5378187756423613005}
-  Enemy: {fileID: 0}
+  Enemy: {fileID: 8814448288662906702, guid: b0afa911311385744b039a544624a441, type: 3}
   rotationSpeed: 20
 --- !u!1001 &4043352929289702403
 PrefabInstance:

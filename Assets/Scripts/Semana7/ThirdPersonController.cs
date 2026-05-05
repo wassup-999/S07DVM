@@ -317,7 +317,7 @@ public class ThirdPersonController : MonoBehaviour
     private void OnAttack(InputAction.CallbackContext context)
     {
         //(Physics.SphereCast(WeaponShootAnchor.position, 5f, characterAimCamera.transform.forward, out RaycastHit hit, 100f, enemyMask))
-        if ( Physics.Raycast(WeaponShootAnchor.position, characterAimCamera.transform.forward, out RaycastHit hit, 100));
+        if ( Physics.Raycast(WeaponShootAnchor.position, characterAimCamera.transform.forward, out RaycastHit hit, 100, enemyMask))
         {
             if (hit.collider != null)
             {
@@ -333,6 +333,8 @@ public class ThirdPersonController : MonoBehaviour
                 Quaternion rot = Quaternion.LookRotation(hit.normal);
                 ParticleSystem impact = Instantiate(OnHit, hit.point, rot);
                 impact.Play();
+
+                
                 
             }
             else
@@ -343,7 +345,7 @@ public class ThirdPersonController : MonoBehaviour
     }
     private void ThrowStm(InputAction.CallbackContext context)
     {
-        GameObject granade = Instantiate(GranadePrefab, transform.position, Quaternion.identity);
+        GameObject granade = Instantiate(GranadePrefab, transform.position*5, Quaternion.identity);
         Vector3 dir = characterCamera.transform.forward;
         granade.GetComponent<Rigidbody>().AddForce(dir, ForceMode.Impulse);
         Rigidbody rb = granade.GetComponent<Rigidbody>();
