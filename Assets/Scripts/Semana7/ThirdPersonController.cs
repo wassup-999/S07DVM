@@ -328,11 +328,14 @@ public class ThirdPersonController : MonoBehaviour
                 ray.positionCount = 2;
                 ray.SetPosition(0, WeaponShootAnchor.position);
                 ray.SetPosition(1, hit.point);
-                Destroy(ray, 3f);
+                Destroy(ray.gameObject, 3f);
 
                 Quaternion rot = Quaternion.LookRotation(hit.normal);
                 ParticleSystem impact = Instantiate(OnHit, hit.point, rot);
                 impact.Play();
+                Destroy(impact.gameObject, 3f);
+
+
                 var hitObj = hit.collider.gameObject;
                 var agent = hitObj.GetComponent<AgentSimpleController>();
                 if (agent == null)
@@ -340,12 +343,9 @@ public class ThirdPersonController : MonoBehaviour
 
                 if (agent != null)
                 {
-                    
+                    ;
                     agent.life -= 100;
                 }
-              
-
-
             }
             else
             {
