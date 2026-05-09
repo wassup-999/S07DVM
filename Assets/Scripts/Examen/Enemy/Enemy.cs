@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour , IAttackDamage
 {
     [FoldoutGroup("References")]
     public PlayeMechanics player;
@@ -43,14 +43,20 @@ public class Enemy : MonoBehaviour
         if (player == null) return;
         if(Vector3.Distance(player.transform.position, transform.position)<= agent.stoppingDistance)
         {
-            player.MakeDamage(10);
+            player.RecieveDamage(10);
             GameManager.Instance.enemySpawner.CurrentEnemies--;
             Destroy(gameObject);
         }
     }
+    public void RecieveDamage(float damage)
+    {
+        damage = GameManager.Instance.turretBullet.BulletDamage;
+        Life -=damage;
+        Debug.Log("Enemy Hit");
+    }
     public void OnDestroy()
     {
-        if(Life <= 0)
+        if (Life <= 0)
         {
             Destroy(gameObject);
         }

@@ -50,7 +50,7 @@ public class PlayeMechanics : MonoBehaviour , IAttackDamage
         yield break;
     }
     
-    public void MakeDamage(float damage)
+    public void RecieveDamage(float damage)
     {
         damage = GameManager.Instance.enemy.Damage;
         Life -=damage;

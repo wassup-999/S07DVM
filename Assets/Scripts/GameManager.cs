@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public PlayerManager playerManager;
     [FoldoutGroup("References")]
     public Enemy enemy;
+    [FoldoutGroup("References")]
+    public TurretBullet turretBullet;
+
     private void Awake()
     {
         if(Instance == null)

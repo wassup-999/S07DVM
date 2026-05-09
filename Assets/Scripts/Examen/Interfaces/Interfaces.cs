@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IAttackDamage
 {
-    public void MakeDamage(float damage);
+    public void RecieveDamage(float damage);
 }
