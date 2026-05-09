@@ -6,7 +6,7 @@ public class PlayeMechanics : MonoBehaviour , IRecieveDamage
 {
     [FoldoutGroup("Life Settings")]
     public float Life;
-    /*
+    
     [FoldoutGroup("References")]
     public GameObject TurretPrefab;
     [FoldoutGroup("References")]
@@ -16,7 +16,7 @@ public class PlayeMechanics : MonoBehaviour , IRecieveDamage
     [FoldoutGroup("CoolDown Settings")]
     public float TurretSpawnInterval;
     public bool CanSpawnTurret = true;
-    */
+    
     void Start()
     {
         
@@ -24,10 +24,9 @@ public class PlayeMechanics : MonoBehaviour , IRecieveDamage
 
     
     void Update()
-    {
-        
+    {       
     }
-    /*
+    
     public void SpawnTurret()
     {
         if (CanSpawnTurret)
@@ -35,9 +34,7 @@ public class PlayeMechanics : MonoBehaviour , IRecieveDamage
             GameObject Turret = Instantiate(TurretPrefab, SpawnRef.transform.position, Quaternion.identity);
             CanSpawnTurret = false;
             StartCoroutine(CDSpawnTurret());
-        }
-
-        
+        }       
     }
 
 
@@ -52,7 +49,7 @@ public class PlayeMechanics : MonoBehaviour , IRecieveDamage
         CanSpawnTurret = true;
         yield break;
     }
-    */
+    
     public void MakeDamage(float damage)
     {
         damage = GameManager.Instance.enemy.Damage;

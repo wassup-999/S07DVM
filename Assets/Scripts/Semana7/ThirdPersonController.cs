@@ -226,7 +226,6 @@ public class ThirdPersonController : MonoBehaviour
             GameObject turret = Instantiate(TurretPrefab, hit.point, Quaternion.identity);
             turret.transform.up = hit.normal;
         }
-            //PlayerManager.instance.player.SpawnTurret();
     }
     private void OnJump(InputAction.CallbackContext context)
     {
@@ -300,7 +299,7 @@ public class ThirdPersonController : MonoBehaviour
     }
     private void OnAttack(InputAction.CallbackContext context)
     {
-        if(Physics.SphereCast(WeaponShootAnchor.position,5f ,characterAimCamera.transform.forward, out RaycastHit hit, 100, enemyMash))
+        if(Physics.SphereCast(WeaponShootAnchor.position,5f ,characterAimCamera.transform.forward, out RaycastHit hit, 100, enemyMash) && aimMode == true)
         {
             Debug.Log("Hit");
             OnShoot?.Invoke();
@@ -314,9 +313,11 @@ public class ThirdPersonController : MonoBehaviour
             //Hacer daño al enemigo
 
             if (hit.collider.gameObject == null) return;
-            GameObject obj = hit.collider.gameObject;
-            obj.GetComponent<Enemy>().Life-=20;
             
+           
+                GameObject obj = hit.collider.gameObject;
+                obj.GetComponent<Enemy>().Life -= 20;
+
             
             Quaternion rot = Quaternion.LookRotation(hit.normal);
             

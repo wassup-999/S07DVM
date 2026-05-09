@@ -36,7 +36,7 @@ public class Turret : MonoBehaviour
     void Update()
     {
         Rotate();
-        ShootMechanic();
+        
     }
     public void Rotate()
     {
@@ -51,7 +51,7 @@ public class Turret : MonoBehaviour
             Vector3 Head = (Currentenemy.transform.position - transform.position).normalized;
             Quaternion targetQuaternion = Quaternion.LookRotation(Head);
             HeadTurret.transform.rotation = Quaternion.Slerp(HeadTurret.transform.rotation, targetQuaternion, rotationSpeed * Time.deltaTime);
-          
+            
         }       
     }
 
@@ -79,7 +79,17 @@ public class Turret : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            enemys.Add(other.gameObject.GetComponent<Enemy>());
+            enemys.Add(other.gameObject.GetComponent<Enemy>());    
+
+            Currentenemy = other.gameObject;
+            FindEnemy();
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            ShootMechanic(); ;
         }
     }
     private void OnTriggerExit(Collider other)
@@ -95,12 +105,10 @@ public class Turret : MonoBehaviour
         if(ShootTimer >= SpawnInterval)
         {
             GameObject bullet = Instantiate(BulletPrefab, SpawnbulletRef.transform.position, Quaternion.identity);
-            SpawnInterval = 0;
+            Vector3 dir = (Currentenemy.transform.position - transform.position).normalized;
+            bullet.GetComponent<Rigidbody>().AddForce(dir * ShootForce, ForceMode.Impulse);
+            ShootTimer = 0;
         }
-
-
-        
-        //Vector3 dir = bullet.transform.forward;
-        //bullet.GetComponent<Rigidbody>().AddForce(dir * ShootForce, ForceMode.Impulse);
+ 
     }
 }

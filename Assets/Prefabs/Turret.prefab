@@ -78,11 +78,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Turret
   HeadTurret: {fileID: 5378187756423613005}
-  Currentenemy: {fileID: 0}
+  Currentenemy: {fileID: 5331457396299352703, guid: 1e698bb286147d446b355cf4054bc631, type: 3}
   SpawnbulletRef: {fileID: 6539603102736680759}
-  BulletPrefab: {fileID: 559121678636633256, guid: 51ca63bb61600914781a17b17d38c090, type: 3}
+  BulletPrefab: {fileID: 3984686761129350757, guid: 51ca63bb61600914781a17b17d38c090, type: 3}
   rotationSpeed: 20
-  ShootForce: 0
+  ShootForce: 10
+  ShootTimer: 0
+  SpawnInterval: 1
+  enemys: []
 --- !u!135 &8346680809840004450
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -98,11 +101,11 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.7
+  m_Radius: 3.32
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4043352929289702403
 PrefabInstance:
