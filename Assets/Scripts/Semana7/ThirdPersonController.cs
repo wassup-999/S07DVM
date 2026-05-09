@@ -27,6 +27,8 @@ public class ThirdPersonController : MonoBehaviour
     [FoldoutGroup("References")]
     public Transform WeaponShootAnchor;
     [FoldoutGroup("References")]
+    public Transform GranadeSpawner;
+    [FoldoutGroup("References")]
     public Transform SpawnRef;
     [FoldoutGroup("CoolDown Settings")]
     public float CurrentCDSpawn;
@@ -34,9 +36,7 @@ public class ThirdPersonController : MonoBehaviour
     public float TurretSpawnInterval;
     public bool CanSpawnTurret = true;
 
-    [FoldoutGroup("References")]
-    [SerializeField] private float ThrowForce;
-
+    
     [FoldoutGroup("Controller")]
     public float moveSpeed = 5f;
     [FoldoutGroup("Controller")]
@@ -316,7 +316,7 @@ public class ThirdPersonController : MonoBehaviour
     }
     private void OnAttack(InputAction.CallbackContext context)
     {
-        //(Physics.SphereCast(WeaponShootAnchor.position, 5f, characterAimCamera.transform.forward, out RaycastHit hit, 100f, enemyMask))
+        
         if ( Physics.Raycast(WeaponShootAnchor.position, characterAimCamera.transform.forward, out RaycastHit hit, 100, enemyMask))
         {
             if (hit.collider != null)
@@ -355,14 +355,13 @@ public class ThirdPersonController : MonoBehaviour
     }
     private void ThrowStm(InputAction.CallbackContext context)
     {
-        GameObject granade = Instantiate(GranadePrefab, transform.position*5, Quaternion.identity);
-        Vector3 dir = characterCamera.transform.forward;
-        granade.GetComponent<Rigidbody>().AddForce(dir, ForceMode.Impulse);
-        Rigidbody rb = granade.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.AddForce(dir * ThrowForce, ForceMode.Impulse);
-        }
+       
+        
+        
+       GameObject granade = Instantiate(GranadePrefab, GranadeSpawner.transform.position, Quaternion.identity );
+        Vector3 dir = GranadeSpawner.transform.position ;
+
+        
     }
 
     public float GetSpeed()

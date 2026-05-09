@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3306097977485439154}
   - component: {fileID: 1895528416693141271}
   - component: {fileID: 4443559990580988893}
+  - component: {fileID: 1530621265296503358}
   m_Layer: 0
   m_Name: smokebomb
   m_TagString: Untagged
@@ -90,6 +91,27 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &1530621265296503358
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2786125307111303688}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.21154085
+  m_Center: {x: -0.0000010728836, y: 0.04019326, z: -0.0000025480986}
 --- !u!1 &6989726549346301448
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2391333522051278000}
   - component: {fileID: 4846222566863209641}
-  - component: {fileID: 5954459059230870356}
   - component: {fileID: 627491649873354659}
   m_Layer: 0
   m_Name: Granade
@@ -118,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 6989726549346301448}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.675, y: 0.816, z: 24.169518}
+  m_LocalPosition: {x: 5.32943, y: 0.751, z: -5.60179}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -152,27 +173,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &5954459059230870356
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6989726549346301448}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.27518272
-  m_Center: {x: 0, y: 0, z: 0.22481728}
 --- !u!114 &627491649873354659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,10 +186,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granade
   timer: 5
-  radius: 2
-  mask:
-    serializedVersion: 2
-    m_Bits: 119
+  radius: 6
   OnExplotion:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6989726549346301448}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  explosionParticles: {fileID: 19811986, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
