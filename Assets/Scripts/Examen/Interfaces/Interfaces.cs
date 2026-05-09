@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IRecieveDamage
+public interface IAttackDamage
 {
     public void MakeDamage(float damage);
 }

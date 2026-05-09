@@ -1,10 +1,11 @@
-using Unity.Cinemachine;
-using UnityEngine;
-using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
 using System;
-using UnityEngine.Events;
 using System.Collections;
+using Unity.Cinemachine;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class ThirdPersonController : MonoBehaviour
 {
@@ -108,7 +109,8 @@ public class ThirdPersonController : MonoBehaviour
             aimMode = false;
         };
 
-        inputs.Player.Spawn.performed += OnSpawn;
+        inputs.Player.SpawnWall.performed += OnSpawnWall;
+        inputs.Player.SpawnFloor.performed += OnSpawnFloor;
         // inputs.Player.Sprint.performed += OnDash;
 
         inputs.Player.ThrowGranade.performed += ThroSmt;
@@ -218,7 +220,7 @@ public class ThirdPersonController : MonoBehaviour
         granade.GetComponent<Rigidbody>().AddForce(dir * throwForce, ForceMode.Impulse);
 
     }
-    private void OnSpawn(InputAction.CallbackContext context)
+    private void OnSpawnWall(InputAction.CallbackContext context)
     {
         if (Physics.SphereCast(WeaponShootAnchor.position, 5f, characterAimCamera.transform.forward, out RaycastHit hit, 100, enemyMash))
         {
@@ -227,6 +229,11 @@ public class ThirdPersonController : MonoBehaviour
             turret.transform.up = hit.normal;
         }
     }
+    private void OnSpawnFloor(InputAction.CallbackContext context)
+    {
+        PlayerManager.instance.player.SpawnTurret();
+    }
+
     private void OnJump(InputAction.CallbackContext context)
     {
         if (!controller.isGrounded) return;

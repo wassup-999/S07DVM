@@ -183,7 +183,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Spawn"",
+                    ""name"": ""SpawnWall"",
                     ""type"": ""Button"",
                     ""id"": ""420f6f3e-2f3e-42ac-8979-c0780831b1e9"",
                     ""expectedControlType"": """",
@@ -195,6 +195,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""ThrowGranade"",
                     ""type"": ""Button"",
                     ""id"": ""e2cdae79-cfa6-42e2-9093-5497cb444eae"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpawnFloor"",
+                    ""type"": ""Button"",
+                    ""id"": ""707977d4-f124-4a57-bc69-63c0ed38f1c3"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -601,11 +610,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0aff4961-b830-4965-bf24-4b92d6457e18"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Spawn"",
+                    ""action"": ""SpawnWall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -617,6 +626,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ThrowGranade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76f04594-1e21-4f22-901e-0261075c3073"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpawnFloor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1214,8 +1234,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
-        m_Player_Spawn = m_Player.FindAction("Spawn", throwIfNotFound: true);
+        m_Player_SpawnWall = m_Player.FindAction("SpawnWall", throwIfNotFound: true);
         m_Player_ThrowGranade = m_Player.FindAction("ThrowGranade", throwIfNotFound: true);
+        m_Player_SpawnFloor = m_Player.FindAction("SpawnFloor", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1319,8 +1340,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Next;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Aim;
-    private readonly InputAction m_Player_Spawn;
+    private readonly InputAction m_Player_SpawnWall;
     private readonly InputAction m_Player_ThrowGranade;
+    private readonly InputAction m_Player_SpawnFloor;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1373,13 +1395,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Spawn".
+        /// Provides access to the underlying input action "Player/SpawnWall".
         /// </summary>
-        public InputAction @Spawn => m_Wrapper.m_Player_Spawn;
+        public InputAction @SpawnWall => m_Wrapper.m_Player_SpawnWall;
         /// <summary>
         /// Provides access to the underlying input action "Player/ThrowGranade".
         /// </summary>
         public InputAction @ThrowGranade => m_Wrapper.m_Player_ThrowGranade;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SpawnFloor".
+        /// </summary>
+        public InputAction @SpawnFloor => m_Wrapper.m_Player_SpawnFloor;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1436,12 +1462,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
-            @Spawn.started += instance.OnSpawn;
-            @Spawn.performed += instance.OnSpawn;
-            @Spawn.canceled += instance.OnSpawn;
+            @SpawnWall.started += instance.OnSpawnWall;
+            @SpawnWall.performed += instance.OnSpawnWall;
+            @SpawnWall.canceled += instance.OnSpawnWall;
             @ThrowGranade.started += instance.OnThrowGranade;
             @ThrowGranade.performed += instance.OnThrowGranade;
             @ThrowGranade.canceled += instance.OnThrowGranade;
+            @SpawnFloor.started += instance.OnSpawnFloor;
+            @SpawnFloor.performed += instance.OnSpawnFloor;
+            @SpawnFloor.canceled += instance.OnSpawnFloor;
         }
 
         /// <summary>
@@ -1483,12 +1512,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
-            @Spawn.started -= instance.OnSpawn;
-            @Spawn.performed -= instance.OnSpawn;
-            @Spawn.canceled -= instance.OnSpawn;
+            @SpawnWall.started -= instance.OnSpawnWall;
+            @SpawnWall.performed -= instance.OnSpawnWall;
+            @SpawnWall.canceled -= instance.OnSpawnWall;
             @ThrowGranade.started -= instance.OnThrowGranade;
             @ThrowGranade.performed -= instance.OnThrowGranade;
             @ThrowGranade.canceled -= instance.OnThrowGranade;
+            @SpawnFloor.started -= instance.OnSpawnFloor;
+            @SpawnFloor.performed -= instance.OnSpawnFloor;
+            @SpawnFloor.canceled -= instance.OnSpawnFloor;
         }
 
         /// <summary>
@@ -1860,12 +1892,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAim(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Spawn" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "SpawnWall" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSpawn(InputAction.CallbackContext context);
+        void OnSpawnWall(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "ThrowGranade" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -1873,6 +1905,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnThrowGranade(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SpawnFloor" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSpawnFloor(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

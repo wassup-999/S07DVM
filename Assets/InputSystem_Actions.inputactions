@@ -97,7 +97,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Spawn",
+                    "name": "SpawnWall",
                     "type": "Button",
                     "id": "420f6f3e-2f3e-42ac-8979-c0780831b1e9",
                     "expectedControlType": "",
@@ -109,6 +109,15 @@
                     "name": "ThrowGranade",
                     "type": "Button",
                     "id": "e2cdae79-cfa6-42e2-9093-5497cb444eae",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpawnFloor",
+                    "type": "Button",
+                    "id": "707977d4-f124-4a57-bc69-63c0ed38f1c3",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -515,11 +524,11 @@
                 {
                     "name": "",
                     "id": "0aff4961-b830-4965-bf24-4b92d6457e18",
-                    "path": "<Keyboard>/1",
+                    "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Spawn",
+                    "action": "SpawnWall",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -531,6 +540,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ThrowGranade",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76f04594-1e21-4f22-901e-0261075c3073",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpawnFloor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

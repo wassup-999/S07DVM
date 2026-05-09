@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
 
-public class PlayeMechanics : MonoBehaviour , IRecieveDamage
+public class PlayeMechanics : MonoBehaviour , IAttackDamage
 {
     [FoldoutGroup("Life Settings")]
     public float Life;
