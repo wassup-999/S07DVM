@@ -784,6 +784,7 @@ MonoBehaviour:
   playerManager: {fileID: 324515121}
   enemy: {fileID: 8842395305798540399, guid: 1e698bb286147d446b355cf4054bc631, type: 3}
   turretBullet: {fileID: 1383800525479419200, guid: 51ca63bb61600914781a17b17d38c090, type: 3}
+  EnemyPrefab: {fileID: 5331457396299352703, guid: 1e698bb286147d446b355cf4054bc631, type: 3}
 --- !u!1001 &849618090
 PrefabInstance:
   m_ObjectHideFlags: 0

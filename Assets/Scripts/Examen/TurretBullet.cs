@@ -3,7 +3,7 @@ using UnityEngine;
 public class TurretBullet : MonoBehaviour 
 {
     public float BulletDamage;
-
+    public Enemy enemy;
     
     void Start()
     {
@@ -17,18 +17,28 @@ public class TurretBullet : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {
-        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-        //collision.gameObject.CompareTag("Enemy")
-        if (enemy !=null)
+    {  
+        Enemy enemyLife = collision.gameObject.GetComponent<Enemy>();
+        if (enemyLife != null) 
+        {
+            enemyLife.RecieveDamage(20);
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject,3);
+        }
+        /*
+        if (collision.gameObject.name == "Enemy")
         {            
             Debug.Log("Collition");
-            GameManager.Instance.enemy.RecieveDamage(20);
+            enemy.RecieveDamage(20);
             Destroy(gameObject);
         }
         else
         {
             Destroy(gameObject, 3);
         }
+        */
     }
 }

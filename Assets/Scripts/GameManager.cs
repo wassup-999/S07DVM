@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("References")]
     public Enemy enemy;
     [FoldoutGroup("References")]
-    public TurretBullet turretBullet;
+    public TurretBullet turretBullet;    
 
     private void Awake()
     {
